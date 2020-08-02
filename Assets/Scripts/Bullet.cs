@@ -6,8 +6,10 @@ public class Bullet : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.tag);
-        Debug.Log(collision.name);
-        Destroy(this.gameObject);
+        if (collision.tag == "Wall")
+        {
+            collision.gameObject.GetComponent<EnemyController>().damageEnemy();
+            Destroy(this.gameObject);
+        }
     }
 }

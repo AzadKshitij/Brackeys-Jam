@@ -6,10 +6,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 100.0f;
-
+    [SerializeField] private GameObject body;
     private Rigidbody2D playerRB;
     private Vector3 moveDir;
     private bool isDashing = false;
+
+    
+
 
     private void Awake()
     {
@@ -31,12 +34,12 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            body.transform.localScale = new Vector3(-1, 1, 1);
             moveX = -1.0f;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            body.transform.localScale = new Vector3(1, 1, 1);
             moveX = 1.0f;
         }
 
