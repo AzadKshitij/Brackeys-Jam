@@ -44,6 +44,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        Debug.Log(PlayerPrefs.GetInt("enemyKilled"));
+
         if (Vector2.Distance(transform.position, player.position) > stoppingDistance)
         {
             animator.SetBool("isFollowing", true);
@@ -68,12 +70,12 @@ public class EnemyController : MonoBehaviour
         {
             timeBWShots -= Time.deltaTime;
         }
-
         if (healt <= 0)
         {
+            PlayerPrefs.SetInt("enemyKilled",PlayerPrefs.GetInt("enemyKilled")+1);
             Destroy(gameObject);
+            Debug.Log(PlayerPrefs.GetInt("enemyKilled"));
         }
-
         if (player.position.x < this.gameObject.transform.position.x)
         {
             this.gameObject.transform.localScale = new Vector3(1, 1, 1);
@@ -86,7 +88,7 @@ public class EnemyController : MonoBehaviour
 
     public void damage(int amount)
     {
-        Debug.Log("Damage");
+        FindObjectOfType<SoundManager>().playSound("Hurt");
         healt -= amount;
     }
 }

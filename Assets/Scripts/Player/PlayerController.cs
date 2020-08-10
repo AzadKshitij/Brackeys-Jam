@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        playerHealth.text = "100";
         GameOverWindow.SetActive(false);
         instance = this;
         playerRB = GetComponent<Rigidbody2D>();
@@ -33,6 +34,9 @@ public class PlayerController : MonoBehaviour
     {
         float moveX = 0.0f;
         float moveY = 0.0f;
+
+        
+
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -63,18 +67,26 @@ public class PlayerController : MonoBehaviour
             isDashing = true;
         }
 
+        if(PlayerPrefs.GetString("haveRewind") == "true"){
+            if(Input.GetKeyDown(KeyCode.H)){
+                Phealth += 30;
+                PlayerPrefs.SetString("haveRewind","false");
+            }
+        }
+
         if (Phealth <= 0)
         {
             Cursor.visible = true;
             GameOverWindow.SetActive(true);
             Time.timeScale = 0;
+            playerHealth.text = "000";
         }
-        playerRB.velocity = moveDir * speed * Time.deltaTime;
         moveDir = new Vector3(moveX, moveY, 0).normalized;
     }
 
     private void FixedUpdate()
     {
+        playerRB.velocity = moveDir * speed * Time.deltaTime;
         float dashAmount = 2.0f;
         if(isDashing)
         {
@@ -87,7 +99,6 @@ public class PlayerController : MonoBehaviour
     {
         Phealth -= damage;
         playerHealth.text = Phealth.ToString();
-        Debug.Log(Phealth);
     }
 
     private void Rewind()

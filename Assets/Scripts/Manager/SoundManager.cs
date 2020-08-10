@@ -18,11 +18,13 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
         foreach (Sound s in sounds)
         { 
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
+            s.source.volume = s.Volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
             
         }
     }
@@ -45,6 +47,7 @@ public class SoundManager : MonoBehaviour
         public float Volume;
         [Range(0,1)]
         public float pitch;
+        public bool loop;
 
         [HideInInspector]
         public AudioSource source;

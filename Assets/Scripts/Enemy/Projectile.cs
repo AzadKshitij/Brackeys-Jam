@@ -17,6 +17,7 @@ public class Projectile : MonoBehaviour
     private void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        
         if((transform.position.x == target.x) && (transform.position.y == target.y))
         {
             Destroy(gameObject);
@@ -25,9 +26,15 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+       if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerController>().damage(5);
+            collision.gameObject.GetComponent<PlayerController>().damage(5); 
+            Destroy(gameObject);
         }
+        if (collision.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }   
     }
+    
 }

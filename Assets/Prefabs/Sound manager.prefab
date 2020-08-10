@@ -45,7 +45,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: AutomaticGunSound
-    clip: {fileID: 8300000, guid: 87b2b239e6d1dca45b6a6dfd2f11369f, type: 3}
+    clip: {fileID: 8300000, guid: b0c826f7094a20b43a20cb46b4b920b7, type: 3}
+    Volume: 0
+    pitch: 0.5
+    source: {fileID: 0}
+  - name: Hurt
+    clip: {fileID: 8300000, guid: b7d26e6116e315946b0b59d90edd80fd, type: 3}
+    Volume: 0
+    pitch: 0.5
+    source: {fileID: 0}
+  - name: MainMusic
+    clip: {fileID: 8300000, guid: 397e45ce5ca6ab547bf8fd1adc0342d1, type: 3}
     Volume: 0
     pitch: 0.5
     source: {fileID: 0}
